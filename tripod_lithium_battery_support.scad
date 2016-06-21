@@ -11,11 +11,12 @@ module truncated_pyramid(base_side, top_side, height) {
     );
 }
 
-module tripod_base(base_side, top_side, height, hollow=0.85) {
+module tripod_base(base_side, top_side, height, wall) {
+    scaling = (base_side - wall * 2) / base_side;
     union() {
         difference() {
             truncated_pyramid(base_side, top_side, height);
-            translate([0, 0, -0.1]) scale(hollow) {
+            translate([0, 0, -0.1]) scale(scaling) {
                 truncated_pyramid(base_side, top_side, height);
             }
         }
@@ -32,7 +33,7 @@ module battery_support(width, length, height) {
 }
 
 module tripod_lithium_battery_support(
-        base_bottom, base_top, base_height,
+        base_bottom, base_top, base_height, base_wall,
         support_width, support_length, support_height,
         base_distance_from_edge
 
@@ -44,7 +45,7 @@ module tripod_lithium_battery_support(
 
     union() {
         translate([0, 0, -base_height]) {
-            tripod_base(base_bottom, base_top, base_height);
+            tripod_base(base_bottom, base_top, base_height, base_wall);
         }
         translate([0, support_translate, 0]) {
             battery_support(support_width, support_length, support_height);
@@ -56,6 +57,7 @@ module tripod_lithium_battery_support(
 base_bottom = 43.30;
 base_top = 35.20;
 base_height = 8.6;
+base_wall = 3;
 
 support_width = 55;
 support_length = 90;
@@ -64,7 +66,7 @@ support_height = 4;
 base_distance_from_edge = 16;
 
 tripod_lithium_battery_support(
-    base_bottom, base_top, base_height,
+    base_bottom, base_top, base_height, base_wall,
     support_width, support_length, support_height,
     base_distance_from_edge
 );
