@@ -2,6 +2,9 @@
 About
 =====
 
+.. image:: https://raw.githubusercontent.com/carlos-jenkins/tripod_lithium_battery_support/master/thing.png
+   :align: right
+
 A 3D printable quick release plate for the Dolica ST-500 or compatible tripods
 that allows to place a long lasting lithium battery (usb power pack) on the
 quick release bay.
